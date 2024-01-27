@@ -14,19 +14,22 @@
 
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  {% if request.user.is_authenticated %}
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">Welcome, {{ request.user.first_name }}!</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
+          <span class="mdl-layout-title">
+              Welcome, {{ request.user.first_name }}!
+          </span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+          </nav>
       </div>
     </header>
 
@@ -39,20 +42,17 @@
         <a class="mdl-navigation__link" href="">Link</a>
       </nav>
     </div>
+  {% endif %}
 
-    <main class="mdl-layout__content">        
-        <div class="page-content">
-            <h1>    Chatroom {{ request.user }}</h1>
-            {% if request.user.is_authenticated %}
-            <div>
-              Du bist eingeloggt!<br><br>
-            </div>
-            {% endif %}
-
+  <main class="mdl-layout__content">        
+      <div class="page-content">
+          {% if request.user.is_authenticated %}
+            <h1>Chatroom {{ request.user }}</h1>
+            
             {% for message in messages %}
-            <div>
-              <span class="grey-color">[{{ message.created_at }}]</span> {{ message.author.first_name }}: <i>{{ message.text }}</i>
-            </div>
+              <div>
+                <span class="grey-color">[{{ message.created_at }}]</span> {{ message.author.first_name }}: <i>{{ message.text }}</i>
+              </div>
             {% endfor %}
 
             <form action="/chat/" method="post">
@@ -62,13 +62,21 @@
                   <input class="mdl-textfield__input" type="text" id="sample3" name="textmessage">
                   <label class="mdl-textfield__label" for="sample3">Text...</label>
                 </div>
-
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Send
                 </button>
             </form>
 
+          {% else %}
+              <h1>Not logged in</h1>
+              <p>
+                You are currently not logged in. Please log in. <br>
+                Please click <a href="/login">here</a>.
 
-        </div>
-    </main>
-  </div>
+              </p>
+          {% endif %}
+
+
+      </div>
+  </main>
+</div>
