@@ -6,6 +6,10 @@
     .page-content {
         padding: 100px 100px;
     }
+
+    .grey-color {
+      color: rgba(0, 0, 0, 0.4)
+    }
 </style>
 
 <!-- Always shows a header, even in smaller screens. -->
@@ -44,7 +48,13 @@
               Du bist eingeloggt!<br><br>
             </div>
             {% endif %}
-            
+
+            {% for message in messages %}
+            <div>
+              <span class="grey-color">[{{ message.created_at }}]</span> {{ message.author.first_name }}: <i>{{ message.text }}</i>
+            </div>
+            {% endfor %}
+
             <form action="/chat/" method="post">
                 <!-- token - ist eine versteckte Variable, die zuordnet, dass die Anfrage von mir kommt -->
                 {% csrf_token %}
