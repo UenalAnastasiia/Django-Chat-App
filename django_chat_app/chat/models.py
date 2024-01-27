@@ -12,7 +12,7 @@ class Message(models.Model):
     # zeigt Namen von den registrierten Users
     # on_delete=models.CASCADE => löscht z.B. die Nachricht, wenn der User gelöscht wurde
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
         related_name='author_message_set'
     )

@@ -36,11 +36,20 @@
       </nav>
     </div>
 
-    <main class="mdl-layout__content">
+    <main class="mdl-layout__content">        
         <div class="page-content">
-            <form action="#">
+            <h1>    Chatroom {{ request.user }}</h1>
+            {% if request.user.is_authenticated %}
+            <div>
+              Du bist eingeloggt!<br><br>
+            </div>
+            {% endif %}
+            
+            <form action="/chat/" method="post">
+                <!-- token - ist eine versteckte Variable, die zuordnet, dass die Anfrage von mir kommt -->
+                {% csrf_token %}
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
+                  <input class="mdl-textfield__input" type="text" id="sample3" name="textmessage">
                   <label class="mdl-textfield__label" for="sample3">Text...</label>
                 </div>
 
