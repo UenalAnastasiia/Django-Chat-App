@@ -1,13 +1,27 @@
 from django.db import models
-from django.db.models.fields import DateField
 from datetime import date
 from django.conf import settings
 
 # Create your models here
+
+class Chat(models.Model):
+    created_at = models.DateField(default=date.today)
+    
 class Message(models.Model):
     text = models.CharField(max_length=500)
-    created_at = DateField(default=date.today)
-    #chat = Chat Klasse verknüpfen
+    created_at = models.DateField(default=date.today)
+
+    chat = models.ForeignKey(
+        Chat,
+        on_delete=models.CASCADE, 
+        related_name='chat_message_set',
+        # Standartwert einer Nachricht ist None
+        default=None,
+        # Es wird erlaubt leere Werte einzugeben
+        blank=True,
+        # Damit akzeptiert die Datenbank Null-Werte
+        null=True
+    )
 
     # zeigt Namen von den registrierten Users
     # on_delete=models.CASCADE => löscht z.B. die Nachricht, wenn der User gelöscht wurde
