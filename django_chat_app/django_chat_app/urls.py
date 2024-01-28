@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from chat.views import chat_view, login_view, logout_view, send_message_to_DB
+from register import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('chat/send/', send_message_to_DB),
     path('login/', login_view),
     path('logout/', logout_view),
+    path("register/", v.register),
 ]
