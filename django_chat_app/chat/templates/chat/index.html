@@ -10,6 +10,11 @@
     .grey-color {
       color: rgba(0, 0, 0, 0.4)
     }
+
+    .mdl-layout-spacer {
+      display: flex;
+      justify-content: flex-end;
+    }
 </style>
 
 <!-- Always shows a header, even in smaller screens. -->
@@ -21,8 +26,12 @@
           <span class="mdl-layout-title">
               Welcome, {{ request.user.first_name }}!
           </span>
+          
+          
           <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-layout-spacer">
+            <button><a href="/logout/">Logout</a></button>
+          </div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
             <a class="mdl-navigation__link" href="">Link</a>
@@ -71,7 +80,7 @@
               <h1>Not logged in</h1>
               <p>
                 You are currently not logged in. Please log in. <br>
-                Please click <a href="/login">here</a>.
+                Please click <a href="/login/">here</a>.
 
               </p>
           {% endif %}
