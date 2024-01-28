@@ -1,23 +1,26 @@
-<h1>Login</h1>
+{% extends "base.html" %}
+{% block content %}
+    <h1>Login</h1>
 
-{% if wrong_password %}
-    <p>Username or Password is wrong</p>
-{% endif %}
+    {% if wrong_password %}
+        <p>Username or Password is wrong</p>
+    {% endif %}
 
-<form action="/login/" method="post">
-    <!-- token - ist eine versteckte Variable, die zuordnet, dass die Anfrage von mir kommt -->
-    {% csrf_token %}
-    <div>
-        <input type="text" name="username">
-    </div>
+    <form action="/login/" method="post">
+        <!-- token - ist eine versteckte Variable, die zuordnet, dass die Anfrage von mir kommt -->
+        {% csrf_token %}
+        <div>
+            <input type="text" name="username">
+        </div>
 
-    <div>
-        <input type="password" name="password">
-    </div>
+        <div>
+            <input type="password" name="password">
+        </div>
 
-    <div>
-        <button>
-            Login
-        </button>
-    </div>
-</form>
+        <div>
+            <button>
+                Login
+            </button>
+        </div>
+    </form>
+{% endblock %}
