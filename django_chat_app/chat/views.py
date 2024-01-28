@@ -5,17 +5,22 @@ from .models import Message, Chat
 from django.contrib.auth import authenticate, login, logout
 
 @login_required(login_url='/login/')
-def index(request):
-    if request.method == 'POST':             
-        print(request.POST['textmessage'])
+def chat_view(request):  
+    chatMessage = Message.objects.filter(chat__id=1)
+    return render(request, 'chat/chatroom.html', {'messages': chatMessage})
+
+
+def send_message_to_DB(request):
+    if request.method == 'POST': 
         myChat = Chat.objects.get(id=1)
         Message.objects.create(
             text=request.POST['textmessage'], 
             chat=myChat, 
             author=request.user,
-            receiver=request.user)
-    chatMessage = Message.objects.filter(chat__id=1)
-    return render(request, 'chat/index.html', {'messages': chatMessage})
+            receiver=request.user) 
+
+    return HttpResponseRedirect('/chat/')
+
 
 def login_view(request):
     if request.method == 'POST':   
@@ -29,6 +34,7 @@ def login_view(request):
         else:
             return render(request, 'auth/login.html', {'wrong_password': True})
     return render(request, 'auth/login.html')
+
 
 def logout_view(request):
     logout(request)
