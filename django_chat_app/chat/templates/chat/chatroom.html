@@ -2,57 +2,7 @@
 {% block content %}
 
 <script>
-  enableSendBtn = () => {
-    if(messageField.value === "") { sendBtn.disabled = true; } 
-    else { sendBtn.disabled = false; }
-  }
 
-
-  async function sendMessage() {
-    let fd = new FormData();
-    let token = '{{ csrf_token }}';
-    fd.append('textmessage', messageField.value);
-    fd.append('csrfmiddlewaretoken', token);
-    const today = new Date();
-    const currMonth = today.toLocaleDateString("en-us", { month: "short" });
-    let currdateFormat = currMonth + '. ' + today.getDate() + ', ' + today.getFullYear();
-    try {
-      messageContainer.innerHTML += `
-        <div style="display: flex;  flex-direction: column" id="deleteMessageContainer" class="grey-color">
-          <div>
-            <span class="grey-color">[${currdateFormat}]</span> 
-            {{ request.user.first_name }}: <i>${messageField.value}</i> 
-          </div>
-          <div>
-            <i class="material-icons">done</i>
-          </div>
-        </div>
-      `;
-        let response = await fetch('/chat/', {
-            method: 'POST',
-            body: fd
-        });
-        let json = await response.json();
-        let nmd = JSON.parse(json);
-        console.log('Message ', nmd.fields);
-        document.getElementById('deleteMessageContainer').remove();
-        messageContainer.innerHTML += `
-        <div style="display: flex; flex-direction: column">
-          <div>
-            <span class="grey-color">[${currdateFormat}]</span> 
-            {{ request.user.first_name }}: <i>${nmd.fields.text}</i> 
-          </div>
-          <div>
-            <i class="material-icons">done</i>
-            <i class="material-icons">done</i>
-          </div>
-        </div>`;
-        messageField.value = '';
-        document.getElementById('messageDiv').classList.remove('is-dirty');
-    } catch (e) {
-        console.error('An error occured', e);
-    }
-  }
 </script>
 
   {% if request.user.is_authenticated %}
@@ -73,6 +23,7 @@
 
   <form onsubmit="sendMessage(); return false;" method="post">
       {% csrf_token %}
+      <input type="hidden" name="userName" value="{{ request.user.first_name }}">
       <div id="messageDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <label class="mdl-textfield__label" for="messageField">Message from {{ request.user.first_name }}</label>
         <input class="mdl-textfield__input" type="text" id="messageField" name="textmessage" onkeyup="enableSendBtn()" maxlength="500">
