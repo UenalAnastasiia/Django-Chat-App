@@ -1,15 +1,68 @@
 {% extends "base.html" %}
-
-<h1>Create an Account</h1>
-
 {% block content %}
-    <form method="POST" class="form-group">
-		{% csrf_token %}
-		{{ form }}
-		<button type="submit" class="btn btn-success">Register</button>
-    </form>
-
-	<div>
-        Have an account? <a href="/login/">Sign In</a>
+<div class="login-register-container">
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 16px 16px 4px 16px">
+    <div style="display: flex; padding-top: 16px; justify-content: center;">
+      <h2 class="mdl-card__title-text">Create an account</h2>
     </div>
+
+    <div class="mdl-card__supporting-text">
+      <form method="POST" class="form-group">
+        {% csrf_token %}
+        <form method="POST" class="form-group">
+          {% csrf_token %}
+          <!-- {{ form }} -->
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="id_username">Username</label>
+            <input class="mdl-textfield__input" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus
+              required aria-describedby="id_username_helptext" id="id_username">
+
+            <div class="mdl-tooltip" data-mdl-for="id_username" id="id_username_helptext">
+              150 characters or fewer. Letters, digits and @/./+/-/_ only.
+            </div>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="id_password1">Password</label>
+            <input class="mdl-textfield__input" type="password" name="password1" autocomplete="new-password" required
+              aria-describedby="id_password1_helptext" id="id_password1">
+
+            <div class="mdl-tooltip" data-mdl-for="id_password1" id="id_password1_helptext">
+              ~ Can’t be too similar to your other personal information. <br>
+              ~ Must contain at least 8 characters. <br>
+              ~ Can’t be a commonly used password. <br>
+              ~ Can’t be entirely numeric.
+            </div>            
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="id_password2">Password confirmation</label>
+            <input class="mdl-textfield__input" type="password" name="password2" autocomplete="new-password" required
+              aria-describedby="id_password2_helptext" id="id_password2">
+
+            <div class="mdl-tooltip" data-mdl-for="id_password2" id="id_password2_helptext">
+              Enter the same password as before, for verification.
+            </div>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="id_email">Email</label>
+            <input class="mdl-textfield__input" type="email" name="email" maxlength="320" required id="id_email">
+          </div>
+
+          <div style="text-align: center;">
+            <button type="submit"
+              class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Register
+            </button>
+          </div>
+        </form>
+      </form>
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border" style="text-align: center; margin-top: 12px;">
+      Have an account? <a href="/login/">Sign In</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

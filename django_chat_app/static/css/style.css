@@ -1,9 +1,13 @@
-.login-container {
+.login-register-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 90vh;
+}
+
+a {
+  text-decoration: none;
 }
 
 .grey-color {
@@ -13,4 +17,20 @@
 .mdl-layout-spacer {
   display: flex;
   justify-content: flex-end;
+}
+
+input[required] {
+  color: green;
+}
+
+.mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
+  color: green;
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__input {
+  border-color: green;
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__label:after {
+  background-color: green;
 }

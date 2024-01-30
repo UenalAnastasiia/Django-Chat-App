@@ -82,3 +82,11 @@ enableSendBtn = () => {
   if(messageField.value === "") { sendBtn.disabled = true; } 
   else { sendBtn.disabled = false; }
 }
+
+requiredInputColor = () => {
+  let required = document.querySelectorAll("input[required]");
+  
+  required.forEach(function(element) {
+    element.style.color = "green";
+  });
+}
