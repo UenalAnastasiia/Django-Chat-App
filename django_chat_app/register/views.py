@@ -13,6 +13,8 @@ def register(response):
             
             user.is_valid = False
             return redirect("/login")
+        else:
+            return render(response, 'register/register.html', {'form': form})
     else:
         form = RegisterForm()
 

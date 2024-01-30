@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<script>
+  var dialog = document.querySelector('dialog');
+  dialogPolyfill.registerDialog(dialog);
+  
+  function showThisDialog() {
+    document.getElementById('this-dialog').show();
+  }
+  
+  function hideThisDialog() {
+    document.getElementById('this-dialog').close();
+  }
+
+</script>
 <div class="login-register-container">
   <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 16px 16px 4px 16px">
     <div style="display: flex; padding-top: 16px; justify-content: center;">
@@ -7,8 +20,6 @@
     </div>
 
     <div class="mdl-card__supporting-text">
-      <form method="POST" class="form-group">
-        {% csrf_token %}
         <form method="POST" class="form-group">
           {% csrf_token %}
           <!-- {{ form }} -->
@@ -49,6 +60,12 @@
             <label class="mdl-textfield__label" for="id_email">Email</label>
             <input class="mdl-textfield__input" type="email" name="email" maxlength="320" required id="id_email">
           </div>
+
+          {% if form.errors %}
+            <div class="register-error-box" style="color: red;">
+                {{ form.errors }}
+            </div>
+          {% endif %}
 
           <div style="text-align: center;">
             <button type="submit"
