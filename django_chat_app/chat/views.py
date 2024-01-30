@@ -1,25 +1,24 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.core import serializers
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from .models import Message, Chat
 from django.contrib.auth import authenticate, login, logout
 
 @login_required(login_url='/login/')
 def chat_view(request):  
-    chatMessage = Message.objects.filter(chat__id=1)
-    return render(request, 'chat/chatroom.html', {'messages': chatMessage})
-
-
-def send_message_to_DB(request):
     if request.method == 'POST': 
         myChat = Chat.objects.get(id=1)
-        Message.objects.create(
+        new_message = Message.objects.create(
             text=request.POST['textmessage'], 
             chat=myChat, 
-            author=request.user,
+            author=request.user, 
             receiver=request.user) 
+        serialized_message = serializers.serialize('json', [ new_message ])
+        return JsonResponse(serialized_message[1:-1], safe=False)
 
-    return HttpResponseRedirect('/chat/')
+    chatMessage = Message.objects.filter(chat__id=1)
+    return render(request, 'chat/chatroom.html', {'messages': chatMessage})
 
 
 def login_view(request):
