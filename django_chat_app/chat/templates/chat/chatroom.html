@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<script>
-
-</script>
-
   {% if request.user.is_authenticated %}
   <h1>Chatroom {{ request.user }}</h1>
 
-  <div style="display: flex;  flex-direction: column" id="messageContainer">
+  <div id="messageContainer">
     {% for message in messages %}
-        <div>
+        <div style="position: relative;">
           <span class="grey-color">[{{ message.created_at }}]</span> 
           {{ message.author.first_name }}: <i>{{ message.text }}</i> 
-        </div>
-        <div>
-          <i class="material-icons">done</i>
-          <i class="material-icons">done</i>
+          <i class="material-icons" 
+            style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 0px;">done</i>
+          <i class="material-icons" 
+            style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 0px;">done</i>
         </div>
     {% endfor %}
   </div>
@@ -25,16 +21,15 @@
       {% csrf_token %}
       <input type="hidden" name="userName" value="{{ request.user.first_name }}">
       <div id="messageDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <label class="mdl-textfield__label" for="messageField">Message from {{ request.user.first_name }}</label>
+        <label class="mdl-textfield__label" for="messageField">Your Message</label>
         <input class="mdl-textfield__input" type="text" id="messageField" name="textmessage" onkeyup="enableSendBtn()" maxlength="500">
       </div>
-      <button id='sendBtn' disabled class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        Send
+      <button id='sendBtn' disabled class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+        <i class="material-icons">send</i>
       </button>
   </form>
 
   
-
   {% else %}
     <h1>Not logged in</h1>
     <p>

@@ -1,12 +1,12 @@
 .page-content {
-    padding: 100px 100px;
-  }
+  padding: 100px 100px;
+}
 
-  .grey-color {
-    color: rgba(0, 0, 0, 0.4);
-  }
+.grey-color {
+  color: rgba(0, 0, 0, 0.4);
+}
 
-  .mdl-layout-spacer {
-    display: flex;
-    justify-content: flex-end;
-  }
+.mdl-layout-spacer {
+  display: flex;
+  justify-content: flex-end;
+}

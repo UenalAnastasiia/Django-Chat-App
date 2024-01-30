@@ -48,14 +48,11 @@ tryFetchData = async (fd, userName, currdateFormat) => {
 
 displayMessageByLoadingToDB = (userName, currdateFormat) => {
   return messageContainer.innerHTML += `
-      <div style="display: flex;  flex-direction: column" id="deleteMessageContainer" class="grey-color">
-        <div>
+      <div id="deleteMessageContainer" class="grey-color" style="position: relative;">
           <span class="grey-color">[${currdateFormat}]</span> 
           ${userName}: <i>${messageField.value}</i> 
-        </div>
-        <div>
-          <i class="material-icons">done</i>
-        </div>
+          <i class="material-icons" 
+            style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 0px;">done</i>
       </div>
     `;
 }
@@ -63,15 +60,13 @@ displayMessageByLoadingToDB = (userName, currdateFormat) => {
 
 displayMessageFromDB = (userName, currdateFormat, newMessageData) => {
   return messageContainer.innerHTML += `
-  <div style="display: flex; flex-direction: column">
-    <div>
+  <div style="position: relative;">
       <span class="grey-color">[${currdateFormat}]</span> 
       ${userName}: <i>${newMessageData.fields.text}</i> 
-    </div>
-    <div>
-      <i class="material-icons">done</i>
-      <i class="material-icons">done</i>
-    </div>
+      <i class="material-icons" 
+        style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 0px;">done</i>
+      <i class="material-icons" 
+        style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 0px;">done</i>
   </div>`;
 }
 
