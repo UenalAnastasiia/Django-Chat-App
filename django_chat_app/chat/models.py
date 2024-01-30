@@ -1,4 +1,3 @@
-from time import timezone
 from django.db import models
 from datetime import date
 from django.conf import settings
@@ -7,6 +6,12 @@ from django.conf import settings
 
 class Chat(models.Model):
     created_at = models.DateField(default=date.today)
+    # receiver = models.CharField(max_length=500)
+    # author = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE, 
+    #     related_name='chat_message_set'
+    # )
     
 class Message(models.Model):
     text = models.CharField(max_length=500)

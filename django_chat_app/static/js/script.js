@@ -48,26 +48,31 @@ tryFetchData = async (fd, userName, currdateFormat) => {
 
 displayMessageByLoadingToDB = (userName, currdateFormat) => {
   return messageContainer.innerHTML += `
-      <div id="deleteMessageContainer" class="grey-color" style="position: relative;">
-          <span class="grey-color">[${currdateFormat}]</span> 
-          ${userName}: <i>${messageField.value}</i> 
-          <i class="material-icons" 
-            style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 0px;">done</i>
-      </div>
+    <div id="deleteMessageContainer" class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end;">
+      <span class="message-span" style="border-bottom-right-radius: 0;">
+        <span class="grey-color">[${currdateFormat}]</span> 
+        ${userName}: <i>${messageField.value}</i> 
+        <i class="material-icons" 
+          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 16px;">done</i>
+      </span> 
+    </div>
     `;
 }
 
 
 displayMessageFromDB = (userName, currdateFormat, newMessageData) => {
   return messageContainer.innerHTML += `
-  <div style="position: relative;">
-      <span class="grey-color">[${currdateFormat}]</span> 
-      ${userName}: <i>${newMessageData.fields.text}</i> 
-      <i class="material-icons" 
-        style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 0px;">done</i>
-      <i class="material-icons" 
-        style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 0px;">done</i>
-  </div>`;
+    <div class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end;">
+      <span class="message-span" style="border-bottom-right-radius: 0;">
+        <span class="grey-color">[${currdateFormat}]</span> 
+        ${userName}: <i>${newMessageData.fields.text}</i> 
+        <i class="material-icons" 
+          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 16px;">done</i>
+        <i class="material-icons" 
+          style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 16px;">done</i>
+      </span> 
+    </div>
+    `;
 }
 
 
@@ -90,3 +95,5 @@ requiredInputColor = () => {
     element.style.color = "green";
   });
 }
+
+let messageContainer = document.getElementById('messageContainer')

@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core import serializers
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from test.sortperf import tabulate
 from .models import Message, Chat
 from django.contrib.auth import authenticate, login, logout
 
@@ -19,6 +21,7 @@ def chat_view(request):
 
     chatMessage = Message.objects.filter(chat__id=1)
     return render(request, 'chat/chatroom.html', {'messages': chatMessage})
+    #return render(request, 'chat/chatroom.html', {'messages': chatMessage})
 
 
 def login_view(request):
