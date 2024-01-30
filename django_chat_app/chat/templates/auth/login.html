@@ -1,30 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Login</h1>
+    <div class="login-container">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="padding: 16px 16px 4px 16px">
+            <div style="display: flex; padding-top: 16px; justify-content: center;">
+                <h2 class="mdl-card__title-text">Login</h2>
+            </div>
 
-    {% if wrong_password %}
-        <p>Username or Password is wrong</p>
-    {% endif %}
+            <div class="mdl-card__supporting-text">
+                <form action="/login/" method="post">
+                    {% csrf_token %}
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" name="username" type="text" id="username">
+                        <label class="mdl-textfield__label" for="username">Username</label>
+                    </div>
 
-    <form action="/login/" method="post">
-        <!-- token - ist eine versteckte Variable, die zuordnet, dass die Anfrage von mir kommt -->
-        {% csrf_token %}
-        <div>
-            <input type="text" name="username">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" name="password" type="password" id="password">
+                        <label class="mdl-textfield__label" for="password">Password</label>
+                    </div>
+
+                    {% if wrong_password %}
+                        <p style="color: red;">Username or Password is wrong</p>
+                    {% endif %}
+            
+                    <div style="text-align: center;">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mdl-card__actions mdl-card--border" style="text-align: center; margin-top: 12px;">
+                Don't have an account? <a href="/register/">Sign Up</a>
+            </div>
         </div>
-
-        <div>
-            <input type="password" name="password">
-        </div>
-
-        <div>
-            <button>
-                Login
-            </button>
-        </div>
-    </form>
-
-    <div>
-        Don't have an account? <a href="/register/">Sign Up</a>
-    </div>
+    </div>  
 {% endblock %}
