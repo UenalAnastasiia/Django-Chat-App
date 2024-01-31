@@ -18,14 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
-from chat.views import chat_view, login_view, logout_view
+from chat.views import chat_view, chatroom_view, login_view, logout_view
 from register import views as v
 
-
+#Specifying defaults for view arguments
 urlpatterns = [
     path('', lambda request: redirect('login/', permanent=True)),
     path('admin/', admin.site.urls),
     path('chat/', chat_view),
+    path('chat/<str:linkname>/', chatroom_view, name="chatroom"),
     path('login/', login_view),
     path('logout/', logout_view),
     path("register/", v.register),

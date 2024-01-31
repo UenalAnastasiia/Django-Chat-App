@@ -42,18 +42,29 @@
           </header>
       
           <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Chatroom</span>
+            <span class="mdl-layout-title" style="text-align: center; padding-left: 0">Chatroom</span>
             <nav class="mdl-navigation">
               {% if request.user.is_authenticated %}
               {% csrf_token %}
                 {% for receiver in receiverList %}
-                  <a class="mdl-navigation__link" href="/chat/">{{ receiver }}</a>
+                  <a class="mdl-navigation__link" style="text-align: center;" href="{% url 'chatroom' receiver %}">{{ receiver }}</a>
                 {% endfor %}
-                <!-- <a class="mdl-navigation__link" href="/chat/">Chat</a> -->
-                <a class="mdl-navigation__link" href="/logout/">Logout</a>
+
                 {% if user.is_superuser %}
-                <a class="mdl-navigation__link" href="/admin/">Admin</a>
+                  <a style="position: absolute; bottom: 80px; left: 80px" href="/admin/">
+                    <button style="width: 90px;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                      Admin
+                    </button>
+                  </a>
                 {% else %} {% endif %}
+                  <a style="position: absolute; bottom: 30px; left: 80px" href="/logout/">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                      Logout
+                    </button>
+                  </a>
+                  
+                </button>
+                
 
               {% else %}
                 <a class="mdl-navigation__link" href="/register/">Register</a>
