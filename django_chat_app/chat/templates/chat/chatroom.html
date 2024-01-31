@@ -11,28 +11,30 @@
         {% for message in userMessages %}
           {% if request.user.username == message.author.username %}
             <div class="mdl-card__supporting-text" 
-              style="position: relative; text-align: end;">
-              <span class="message-span" style="border-top-right-radius: 0;">
-                <span class="grey-color">[{{ message.created_at }}]</span>
+              style="position: relative; text-align: end; height: 50px;">
+              <span class="message-span" style="border-bottom-right-radius: 0;">
+                <span class="grey-color">[{{ message.created_at_time|time:"H:i" }}]</span>
                 {{ message.author.username }}: <i>{{ message.text }}</i> 
                 <i class="material-icons" 
-                  style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 16px;">done</i>
+                  style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 45px;">done</i>
                 <i class="material-icons" 
-                  style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 16px;">done</i>
+                  style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 45px;">done</i>
               </span> 
+              <span class="dateSpan" style="right: 18px;">[{{ message.created_at|date:"M j, Y" }}]</span>
             </div>
   
           {% else %}
             <div class="mdl-card__supporting-text" 
-                style="position: relative; text-align: start;">
+                style="position: relative; text-align: start; height: 50px;">
                 <span class="message-span" style="border-bottom-left-radius: 0;">
-                  <span class="grey-color">[{{ message.created_at }}]</span> 
+                  <span class="grey-color">[{{ message.created_at_time|time:"H:i" }}]</span> 
                   {{ message.author.username }}: <i>{{ message.text }}</i> 
                   <i class="material-icons" 
-                    style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 16px;">done</i>
+                    style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 45px;">done</i>
                   <i class="material-icons" 
-                    style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 16px;">done</i>
+                    style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 45px;">done</i>
                 </span>
+                <span class="dateSpan" style="left: 18px;">[{{ message.created_at }}]</span>
               </div>
           {% endif %}
           {% endfor %}

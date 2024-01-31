@@ -18,7 +18,7 @@
           <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title">
-                    DjChat
+                    DjChat from {{ request.user.username }}
                 </span>
 
                 {% if request.user.is_authenticated %}

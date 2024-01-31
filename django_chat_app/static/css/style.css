@@ -96,3 +96,10 @@ input[required] {
 .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
   background-color: #bfe5d3 !important;
 }
+
+.dateSpan {
+  position: absolute;
+  width: max-content;
+  top: 45px;
+  font-size: 10px;
+}

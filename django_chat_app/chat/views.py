@@ -44,7 +44,6 @@ def logout_view(request):
 
 def chatroom_view(request, linkname):
     choosenUser = User.objects.get(username = linkname)
-    print(choosenUser)
     request.session['recipientName'] = choosenUser.username
     chatMessage1 = Message.objects.filter(author=request.user.id, recipient=choosenUser.username)
     chatMessage2 = Message.objects.filter(author=choosenUser.id, recipient=request.user.username)

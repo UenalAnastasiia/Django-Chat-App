@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import date
+from datetime import date, datetime
 from django.conf import settings
 
 # Create your models here
@@ -11,6 +11,7 @@ class Chat(models.Model):
 class Message(models.Model):
     text = models.CharField(max_length=500)
     created_at = models.DateField(default=date.today)
+    created_at_time = models.TimeField(default=datetime.now, null=True)
     recipient = models.CharField(max_length=100, null=True)
 
     chat = models.ForeignKey(
