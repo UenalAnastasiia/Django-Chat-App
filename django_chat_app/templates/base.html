@@ -46,8 +46,13 @@
             <nav class="mdl-navigation">
               {% if request.user.is_authenticated %}
               {% csrf_token %}
-                {% for receiver in receiverList %}
-                  <a class="mdl-navigation__link" style="text-align: center;" href="{% url 'chatroom' receiver %}">{{ receiver }}</a>
+                {% for data in baseListData %}
+                <div>
+                  <a class="mdl-navigation__link" style="text-align: center; position: relative" href="{% url 'chatroom' data.name %}">
+                    {{ data.name }}
+                    <span class="mdl-badge" data-badge="{{data.messagesLength}}"></span>
+                  </a>
+                </div>
                 {% endfor %}
 
                 {% if user.is_superuser %}

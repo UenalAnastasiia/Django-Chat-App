@@ -19,7 +19,7 @@ def chat_view(request):
             recipient=recipientName) 
         serialized_message = serializers.serialize('json', [ new_message ])
         return JsonResponse(serialized_message[1:-1], safe=False)
-    chatMessage = Message.objects.filter(author=request.user.id, recipient=request.user.username)
+    chatMessage = Message.objects.filter(author=request.user.id, recipient=request.user.username).order_by('created_at_time', 'created_at')
     return render(request, 'chat/chatroom.html', {'userMessages': chatMessage, 'chatroomName': request.user})
 
 
@@ -55,5 +55,5 @@ def chatroom_view(request, linkname):
             chatMessage = chatMessage2
             return render(request, 'chat/chatroom.html', {'userMessages': chatMessage, 'chatroomName': choosenUser})
         else: 
-            chatMessage = sorted(chain(chatMessage1, chatMessage2), key=lambda instance: instance.created_at)
+            chatMessage = sorted(chain(chatMessage1, chatMessage2), key=lambda instance: instance.created_at_time)
             return render(request, 'chat/chatroom.html', {'userMessages': chatMessage, 'chatroomName': choosenUser})

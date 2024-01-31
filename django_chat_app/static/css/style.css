@@ -103,3 +103,9 @@ input[required] {
   top: 45px;
   font-size: 10px;
 }
+
+.mdl-badge {
+  position: absolute !important;
+  top: 16px !important;
+  right: 64px !important;
+}
