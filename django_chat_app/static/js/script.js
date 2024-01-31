@@ -92,6 +92,7 @@ enableSendBtn = () => {
   else { sendBtn.disabled = false; }
 }
 
+
 requiredInputColor = () => {
   let required = document.querySelectorAll("input[required]");
   
@@ -99,5 +100,3 @@ requiredInputColor = () => {
     element.style.color = "green";
   });
 }
-
-// let messageContainer = document.getElementById('messageContainer')

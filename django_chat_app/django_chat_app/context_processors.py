@@ -2,13 +2,13 @@ from django.contrib.auth.models import User
 from chat.models import Message
 
 
-def receiverList(request):
+def receiver_list(request):
     receiverList = list(User.objects.values_list('username', flat=True))
     request.session['receiverListNames'] = receiverList
     return {"receiverList": receiverList}
 
 
-def chatMessagesLength(request):
+def chat_messages_length(request):
     receiverListNames = request.session.get('receiverListNames')
     messagesLength = []
     for receiver in receiverListNames:
@@ -23,7 +23,7 @@ def chatMessagesLength(request):
     return {"messagesLength": messagesLength}
 
 
-def baseMenuListData(request):
+def base_menu_list_data(request):
     nameList = request.session.get('receiverListNames')
     messagesLength = request.session.get('messagesLength')
     baseListData = []

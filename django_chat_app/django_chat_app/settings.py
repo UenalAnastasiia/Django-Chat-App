@@ -68,9 +68,9 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django_chat_app.context_processors.receiverList',
-                'django_chat_app.context_processors.chatMessagesLength',
-                'django_chat_app.context_processors.baseMenuListData'
+                'django_chat_app.context_processors.receiver_list',
+                'django_chat_app.context_processors.chat_messages_length',
+                'django_chat_app.context_processors.base_menu_list_data'
             ],
         },
     },
