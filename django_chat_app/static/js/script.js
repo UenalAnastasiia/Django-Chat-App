@@ -27,7 +27,7 @@ getCurrdateFormat = () => {
   const today = new Date();
   let createDate = [];
   const currdate = today.toLocaleDateString("en-us", { month: "short", day: "numeric", year: "numeric" });
-  const currTime = today.getHours() + ':' + today.getMinutes();
+  const currTime = ('0'+ today.getHours()).slice(-2) + ':' + ('0'+ today.getMinutes()).slice(-2);
   createDate.push({'currdate': currdate, 'currTime': currTime})
   return createDate[0];
 }
@@ -50,12 +50,12 @@ tryFetchData = async (fd, userName, currdateFormat) => {
 
 displayMessageByLoadingToDB = (userName, currdateFormat) => {
   return messageContainer.innerHTML += `
-    <div id="deleteMessageContainer" class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end; height: 50px;">
+    <div id="deleteMessageContainer" class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end; height: 50px; padding-bottom: 0;">
       <span class="message-span" style="border-bottom-right-radius: 0;">
         <span class="grey-color">[${currdateFormat.currTime}]</span> 
         ${userName}: <i>${messageField.value}</i> 
         <i class="material-icons" 
-          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 45px;">done</i>
+          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 30px;">done</i>
       </span> 
       <span class="dateSpan" style="right: 18px;">[${currdateFormat.currdate}]</span>
     </div>
@@ -65,14 +65,14 @@ displayMessageByLoadingToDB = (userName, currdateFormat) => {
 
 displayMessageFromDB = (userName, currdateFormat, newMessageData) => {
   return messageContainer.innerHTML += `
-    <div class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end; height: 50px;">
+    <div class="mdl-card__supporting-text grey-color" style="position: relative; text-align: end; height: 50px; padding-bottom: 0;">
       <span class="message-span" style="border-bottom-right-radius: 0;">
         <span class="grey-color">[${currdateFormat.currTime}]</span> 
         ${userName}: <i>${newMessageData.fields.text}</i> 
         <i class="material-icons" 
-          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 45px;">done</i>
+          style="color: green; font-size: 14px; margin-right: -13px; position: absolute; bottom: 30px;">done</i>
         <i class="material-icons" 
-          style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 45px;">done</i>
+          style="color: green; font-size: 14px; margin-left: 4px; position: absolute; bottom: 30px;">done</i>
       </span> 
       <span class="dateSpan" style="right: 18px;">[${currdateFormat.currdate}]</span>
     </div>
