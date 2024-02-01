@@ -8,15 +8,16 @@ from django.contrib.auth import authenticate, login, logout
 from itertools import chain
 
 @login_required(login_url='/login/')
-def chat_view(request):  
+def chat_view(request): 
+    Chat.objects.get_or_create(id=1) 
     if request.method == 'POST': 
-        myChat = Chat.objects.get(id=1)
+        myChat = Chat.objects.get(id=1) 
         recipient_list_length = len(list(User.objects.values_list('username', flat=True)))
         if recipient_list_length == 1:
             recipientName = request.user.username
         else:
             recipientName = request.session.get('recipientName')
-        print(recipientName)
+            
         new_message = Message.objects.create(
             text=request.POST['textmessage'], 
             chat=myChat, 
